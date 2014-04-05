@@ -1,6 +1,6 @@
 AreWeEatingYet::Application.routes.draw do
   resources :food_trucks
-  
+  get '/' => 'food_trucks#index'  
   get 'food_trucks/:id/directions' => 'food_trucks#directions'
 
   # The priority is based upon order of creation: first created -> highest priority.
