@@ -5,6 +5,7 @@ class FoodTruck < ActiveRecord::Base
     #{self.name}<br>
     #{self.phone_number + '<br>' if self.phone_number}
     #{self.website}
+    #{self.description}
     </div>
     """.html_safe
     string.gsub("\n", "").html_safe

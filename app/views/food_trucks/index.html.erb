@@ -1,4 +1,4 @@
-<h1>Listing food_trucks</h1>
+<h1>Food Trucks</h1>
 
 <table>
   <thead>
@@ -10,7 +10,7 @@
   </thead>
 
   <tbody>
-    <% @food_trucks.each do |food_truck| %>
+    <% @food_trucks.sort!{|a,b|a.updated_at <=> b.updated_at}.each do |food_truck| %>
       <tr>
         <td><%= link_to food_truck.name, food_truck %></td>
         <td><%= link_to 'Update', edit_food_truck_path(food_truck) %></td>

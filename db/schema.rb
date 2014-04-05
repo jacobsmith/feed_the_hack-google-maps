@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140405202156) do
+ActiveRecord::Schema.define(version: 20140405215557) do
 
   create_table "food_truck_owners", force: true do |t|
     t.string   "lat"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20140405202156) do
     t.string   "logo_url"
     t.string   "website"
     t.string   "phone_number"
+    t.text     "description"
   end
 
 end
