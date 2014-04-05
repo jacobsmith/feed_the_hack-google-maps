@@ -5,8 +5,9 @@
   Last updated <%= time_ago_in_words @food_truck.updated_at %>
 </h3>
 
-<div id="map-canvas">Map Goes Here</div>
+<p id="distance"></p>
 
+<div id="map-canvas">Map Goes Here</div>
 
 <%= link_to 'Edit', edit_food_truck_path(@food_truck), class: "button" %> |
 <%= link_to 'Back', food_trucks_path, class: "button" %>
@@ -63,6 +64,7 @@
                   map: map,
                   directions: response
                 });
+                $('#distance').text(response.routes[0].legs[0].distance.text);
               }
               else
               $("#error").append("Unable to retrieve your route<br />");
