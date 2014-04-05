@@ -1,0 +1,31 @@
+<h1>Listing food_truck_owners</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Lat</th>
+      <th>Long</th>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @food_truck_owners.each do |food_truck_owner| %>
+      <tr>
+        <td><%= food_truck_owner.lat %></td>
+        <td><%= food_truck_owner.long %></td>
+        <td><%= food_truck_owner.name %></td>
+        <td><%= link_to 'Show', food_truck_owner %></td>
+        <td><%= link_to 'Edit', edit_food_truck_owner_path(food_truck_owner) %></td>
+        <td><%= link_to 'Destroy', food_truck_owner, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Food truck owner', new_food_truck_owner_path %>
