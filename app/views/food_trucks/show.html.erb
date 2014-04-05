@@ -1,0 +1,91 @@
+<p id="notice"><%= notice %></p>
+
+<h3>
+  <%= @food_truck.name %>
+  Last updated <%= time_ago_in_words @food_truck.updated_at %>
+</h3>
+
+<div id="map-canvas">Map Goes Here</div>
+
+
+<%= link_to 'Edit', edit_food_truck_path(@food_truck), class: "button small" %> |
+<%= link_to 'Back', food_trucks_path, class: "button small" %>
+
+
+    <style>
+       #map-canvas {
+        height: 500px;
+        width: height*1.4;
+        margin: 0px;
+      padding: 0px
+      }
+    </style>
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script>
+      var lat = '<%= @food_truck.lat %>';
+      var long = '<%= @food_truck.long %>';
+      function initialize() {
+        directionsDisplay = new google.maps.DirectionsRenderer();
+
+        var myLatlng = new google.maps.LatLng(lat,long);
+        var mapOptions = {
+          zoom: 15,
+          center: myLatlng
+        }
+        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var user_pos = new google.maps.LatLng(position.coords.latitude,
+          position.coords.longitude);
+
+          var infowindow = new google.maps.InfoWindow({
+            map: map,
+            position: user_pos,
+            content: '<div>Your Current Location</div>'
+          });
+
+          var directionsService = new google.maps.DirectionsService();
+          var directionsRequest = {
+            origin: user_pos,
+            destination: myLatlng,
+            travelMode: google.maps.DirectionsTravelMode.DRIVING,
+            unitSystem: google.maps.UnitSystem.METRIC
+          };
+          directionsService.route(
+            directionsRequest,
+            function(response, status)
+            {
+              if (status == google.maps.DirectionsStatus.OK)
+              {
+                new google.maps.DirectionsRenderer({
+                  map: map,
+                  directions: response
+                });
+              }
+              else
+              $("#error").append("Unable to retrieve your route<br />");
+            });
+
+      })};
+
+        var marker = new google.maps.InfoWindow({
+          position: myLatlng,
+          map: map,
+          animation: google.maps.Animation.DROP,
+          content: "<%= @food_truck.infographic %>"
+        });
+      }
+
+      function displayRoute(route_url) {
+        console.log(route_url); 
+      };
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+
+    
+
+

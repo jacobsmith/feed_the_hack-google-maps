@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+
+gem 'geofsh', :git => 'https://github.com/jacobsmith/geofsh.git'
+gem 'foundation-rails'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.4'
 
